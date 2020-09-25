@@ -82,6 +82,9 @@
     - mysql_log_error | default(false)
   tags: ['skip_ansible_galaxy']
 
+- name: Reload systemd to make MySQL daemon visible.
+  command: systemctl daemon-reload
+
 - name: Ensure MySQL is started and enabled on boot.
   service: "name={{ mysql_daemon }} state=started enabled={{ mysql_enabled_on_startup }}"
   register: mysql_service_configuration
